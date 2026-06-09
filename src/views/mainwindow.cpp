@@ -12,3 +12,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::setToken(const QString &token)
+{
+    jwtToken = token;
+}

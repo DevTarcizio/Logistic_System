@@ -2,6 +2,11 @@
 #define LOGINWINDOW_H
 
 #include <QMainWindow>
+#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
 
 namespace Ui {
 class LoginWindow;
@@ -20,6 +25,9 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
+
+    QNetworkAccessManager *manager;
+    QString jwtToken;
 };
 
 #endif // LOGINWINDOW_H

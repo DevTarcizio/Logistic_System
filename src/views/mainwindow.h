@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QNetworkAccessManager>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +18,12 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+    void setToken(const QString &token);
+
 private:
     Ui::MainWindow *ui;
+
+    QString jwtToken;
+    QNetworkAccessManager *manager;
 };
 #endif // MAINWINDOW_H
