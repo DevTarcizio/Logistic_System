@@ -1,6 +1,7 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 #include "mainwindow.h"
+#include "../services/authservice.h"
 #include <QMessageBox>
 
 LoginWindow::LoginWindow(QWidget *parent)
@@ -36,9 +37,12 @@ void LoginWindow::on_btnLogin_clicked()
             QByteArray response = reply->readAll();
             QJsonDocument doc = QJsonDocument::fromJson(response);
             QJsonObject obj = doc.object();
-            jwtToken = obj["access_token"].toString();
 
-            qDebug() << "Login Realizado com Sucesso!";
+            QString token = obj["access_token"].toString();
+            AuthService::instance().setToken(token);
+
+            qDebug() << "Token Salvo!";
+            qDebug() << AuthService::instance().getToken();
 
             MainWindow *mainWindow = new MainWindow();
             mainWindow->show();

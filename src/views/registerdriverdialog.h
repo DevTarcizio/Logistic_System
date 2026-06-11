@@ -2,6 +2,8 @@
 #define REGISTERDRIVERDIALOG_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include "../services/driverservice.h"
 
 namespace Ui {
 class RegisterDriverDialog;
@@ -20,6 +22,7 @@ private slots:
 
 private:
     Ui::RegisterDriverDialog *ui;
+    DriverService driverService;
 };
 
 #endif // REGISTERDRIVERDIALOG_H

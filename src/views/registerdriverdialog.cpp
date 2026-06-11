@@ -11,6 +11,32 @@ RegisterDriverDialog::RegisterDriverDialog(QWidget *parent)
             &QPushButton::clicked,
             this,
             &QDialog::reject);
+
+    connect(&driverService,
+            &DriverService::driverCreated,
+            this,
+            [this]()
+            {
+                QMessageBox::information(
+                    this,
+                    "Sucesso",
+                    "Motorista cadastrado com sucesso!"
+                    );
+
+                accept();
+            });
+
+    connect(&driverService,
+            &DriverService::requestError,
+            this,
+            [this](const QString &erro)
+            {
+                QMessageBox::critical(
+                    this,
+                    "Erro",
+                    erro
+                    );
+            });
 }
 
 RegisterDriverDialog::~RegisterDriverDialog()
@@ -23,7 +49,16 @@ void RegisterDriverDialog::on_btnSalvar_clicked()
     QString nome = ui->LnNome->text();
     QString telefone = ui->LnTelefone->text();
 
-    qDebug() << "Nome: " << nome;
-    qDebug() << "Telefone: " << telefone;
+    if (nome.isEmpty() || telefone.isEmpty()) {
+        QMessageBox::warning(
+            this,
+            "Campos Obrigatórios",
+            "Preencha todos os campos"
+            );
+
+        return;
+    }
+
+    driverService.createDriver(nome, telefone);
 }
 
