@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>120</y>
+      <y>90</y>
       <width>281</width>
       <height>51</height>
      </rect>
@@ -31,6 +31,19 @@
     </property>
     <property name="text">
      <string>Cristiano Viagens</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnMotoristas">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>240</y>
+      <width>90</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Motoristas</string>
     </property>
    </widget>
   </widget>

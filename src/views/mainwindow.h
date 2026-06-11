@@ -20,6 +20,9 @@ public:
 
     void setToken(const QString &token);
 
+private slots:
+    void on_btnMotoristas_clicked();
+
 private:
     Ui::MainWindow *ui;
 

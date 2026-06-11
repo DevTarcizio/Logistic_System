@@ -24,6 +24,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         src/views/loginwindow.h src/views/loginwindow.cpp src/views/loginwindow.ui
+        src/views/driverswindow.h src/views/driverswindow.cpp src/views/driverswindow.ui
+        src/views/registerdriverdialog.h src/views/registerdriverdialog.cpp src/views/registerdriverdialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Logistic_System APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
