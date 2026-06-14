@@ -2,6 +2,10 @@
 #define DRIVERSWINDOW_H
 
 #include <QWidget>
+#include <QJsonArray>
+#include <QJsonObject>
+
+#include "../services/driverservice.h"
 
 namespace Ui {
 class DriversWindow;
@@ -17,9 +21,12 @@ public:
 
 private slots:
     void on_btnCriarMotorista_clicked();
+    void onDriversLoaded(const QJsonArray &drivers);
 
 private:
     Ui::DriversWindow *ui;
+
+    DriverService driverService;
 };
 
 #endif // DRIVERSWINDOW_H

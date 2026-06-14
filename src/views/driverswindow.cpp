@@ -7,6 +7,15 @@ DriversWindow::DriversWindow(QWidget *parent)
     , ui(new Ui::DriversWindow)
 {
     ui->setupUi(this);
+
+    connect(
+        &driverService,
+        &DriverService::driversLoaded,
+        this,
+        &DriversWindow::onDriversLoaded
+        );
+
+    driverService.listDrivers();
 }
 
 DriversWindow::~DriversWindow()
@@ -20,3 +29,29 @@ void DriversWindow::on_btnCriarMotorista_clicked()
     dialog.exec();
 }
 
+void DriversWindow::onDriversLoaded(const QJsonArray &drivers){
+    qDebug() << "Recebi" << drivers.size() << "motoristas";
+    ui->tableMotoristas->setRowCount(drivers.size());
+
+    for (int row = 0; row < drivers.size(); row++) {
+        QJsonObject driver = drivers[row].toObject();
+
+        ui->tableMotoristas->setItem(
+            row,
+            0,
+            new QTableWidgetItem(QString::number(driver["id"].toInt()))
+        );
+
+        ui->tableMotoristas->setItem(
+            row,
+            1,
+            new QTableWidgetItem(driver["name"].toString())
+        );
+
+        ui->tableMotoristas->setItem(
+            row,
+            2,
+            new QTableWidgetItem(driver["telephone_number"].toString())
+        );
+    }
+}

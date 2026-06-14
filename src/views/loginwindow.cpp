@@ -41,9 +41,6 @@ void LoginWindow::on_btnLogin_clicked()
             QString token = obj["access_token"].toString();
             AuthService::instance().setToken(token);
 
-            qDebug() << "Token Salvo!";
-            qDebug() << AuthService::instance().getToken();
-
             MainWindow *mainWindow = new MainWindow();
             mainWindow->show();
             this->close();

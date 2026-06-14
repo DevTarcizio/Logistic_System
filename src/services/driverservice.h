@@ -13,12 +13,15 @@ public:
     void createDriver(const QString &nome,
                       const QString &telefone);
 
+    void listDrivers();
+
 private:
     QNetworkAccessManager *networkManager;
 
 signals:
     void driverCreated();
-    void requestError(QString error);
+    void driversLoaded(const QJsonArray &drivers);
+    void requestError(const QString &error);
 };
 
 #endif // DRIVERSERVICE_H
