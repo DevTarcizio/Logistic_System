@@ -107,3 +107,32 @@ void DriverService::listDrivers() {
         reply->deleteLater();
     });
 }
+
+void DriverService::deleteDriver(int id) {
+    qDebug() << "Excluindo motorista:" << id;
+    QUrl url(QString("http://127.0.0.1:8000/drivers/delete/%1").arg(id));
+    QNetworkRequest request(url);
+    qDebug() << "URL:" << url.toString();
+
+    request.setRawHeader(
+        "Authorization",
+        QString("Bearer %1")
+            .arg(AuthService::instance().getToken())
+            .toUtf8()
+        );
+
+    QNetworkReply *reply = networkManager->deleteResource(request);
+
+    connect(reply, &QNetworkReply::finished,
+            this, [this, reply]()
+            {
+        if(reply->error() != QNetworkReply::NoError) {
+            emit requestError(reply->errorString());
+            reply->deleteLater();
+            return;
+        }
+
+        emit driverDeleted();
+        reply->deleteLater();
+    });
+}

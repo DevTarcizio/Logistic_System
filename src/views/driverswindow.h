@@ -23,6 +23,8 @@ private slots:
     void on_btnCriarMotorista_clicked();
     void onDriversLoaded(const QJsonArray &drivers);
 
+    void on_btnApagarMotorista_clicked();
+
 private:
     Ui::DriversWindow *ui;
 

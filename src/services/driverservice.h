@@ -15,11 +15,14 @@ public:
 
     void listDrivers();
 
+    void deleteDriver(int id);
+
 private:
     QNetworkAccessManager *networkManager;
 
 signals:
     void driverCreated();
+    void driverDeleted();
     void driversLoaded(const QJsonArray &drivers);
     void requestError(const QString &error);
 };

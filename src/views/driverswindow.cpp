@@ -15,6 +15,15 @@ DriversWindow::DriversWindow(QWidget *parent)
         &DriversWindow::onDriversLoaded
         );
 
+    connect(
+        &driverService,
+        &DriverService::driverDeleted,
+        this,
+        [this]()
+        {
+            driverService.listDrivers();
+        });
+
     driverService.listDrivers();
 }
 
@@ -30,7 +39,7 @@ void DriversWindow::on_btnCriarMotorista_clicked()
 }
 
 void DriversWindow::onDriversLoaded(const QJsonArray &drivers){
-    qDebug() << "Recebi" << drivers.size() << "motoristas";
+    ui->tableMotoristas->clearContents();
     ui->tableMotoristas->setRowCount(drivers.size());
 
     for (int row = 0; row < drivers.size(); row++) {
@@ -55,3 +64,17 @@ void DriversWindow::onDriversLoaded(const QJsonArray &drivers){
         );
     }
 }
+void DriversWindow::on_btnApagarMotorista_clicked()
+{
+    int row = ui->tableMotoristas->currentRow();
+
+    if(row < 0)
+    {
+        return;
+    }
+
+    int id = ui->tableMotoristas->item(row, 0)->text().toInt();
+
+    driverService.deleteDriver(id);
+}
+
